@@ -8,15 +8,19 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 
 // renderer
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(worldroot.innerWidth, worldroot.innerHeight);
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
 worldroot.appendChild(renderer.domElement);
 
 // lighting
 const color = 0xFFFFFF;
 const intensity = 1;
-const light = new THREE.AmbientLight(color, intensity);
-scene.add(light);
+const ambLight = new THREE.AmbientLight(color, intensity);
+const directLight = new THREE.DirectionalLight(color, intensity);
+directLight.position.set(5, 10, 7.5);
+directLight.castShadow = true;
+directLight.intensity = 2;
+scene.add(directLight);
 
 // geometry & materials
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
@@ -27,9 +31,9 @@ scene.add(cube);
 camera.position.z = 5;
 
 // controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.target.set(0, 5, 0);
-// controls.update();
+const controls = new OrbitControls(camera, worldroot);
+controls.target.set(0, 5, 0);
+controls.update();
 
 // animation loop
 function animate() {
