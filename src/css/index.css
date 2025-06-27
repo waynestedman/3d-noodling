@@ -51,7 +51,7 @@ body {
   /* display: flex;
   place-items: center; */
   min-width: 320px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 img, picture, svg, video {
@@ -90,4 +90,12 @@ header {
   text-align: center;
   color: var(--header-font-color);
   box-shadow: var(--box-shadow);
+}
+
+#threeroot {
+  margin-top: 0.5rem;
+  /* background-color: #14141b; */
+  width: 90vw;
+  height: 80vh;
+  margin-inline: auto;
 }
