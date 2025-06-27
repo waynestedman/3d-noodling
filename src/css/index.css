@@ -9,7 +9,7 @@
   --body-margin: 1rem;
   --body-font-color: hsl(0, 0%, 80%);
   --border-radius: 30px;
-  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --box-shadow: 0 4px 8px rgba(209, 209, 209, 0.2);
   --font-family: 'Raleway', sans-serif;
   --font-size: 16px;
   --line-height: 1.5;
@@ -92,10 +92,3 @@ header {
   box-shadow: var(--box-shadow);
 }
 
-#threeroot {
-  margin-top: 0.5rem;
-  /* background-color: #14141b; */
-  width: 90vw;
-  height: 80vh;
-  margin-inline: auto;
-}

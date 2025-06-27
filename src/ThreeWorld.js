@@ -23,16 +23,17 @@ directLight.intensity = 2;
 scene.add(directLight);
 
 // geometry & materials
-const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+const boxGeometry = new THREE.BoxGeometry(2, 2, 2);
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const cube = new THREE.Mesh(boxGeometry, material);
 scene.add(cube);
 
 camera.position.z = 5;
+camera.position.y = -5;
 
 // controls
 const controls = new OrbitControls(camera, worldroot);
-controls.target.set(0, 5, 0);
+controls.target.set(0, 0, 0);
 controls.update();
 
 // animation loop
