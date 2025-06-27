@@ -2,8 +2,9 @@
 
 :root {
   --card-bg-color: hsl(0, 0%, 20%);
-  --header-bg-color: hsl(0, 0%, 30%);
-  --header-padding: 0.5rem;
+  --header-bg-color: hsl(158, 28%, 23%);
+  --header-padding: 0.25rem;
+  --header-font-color: hsl(51, 93%, 94%);
   --body-padding: 1rem;
   --body-margin: 1rem;
   --body-font-color: hsl(0, 0%, 80%);
@@ -83,3 +84,10 @@ p {
   font-size: 1em;
 }
 
+header {
+  background-color: var(--header-bg-color);
+  padding: var(--header-padding);
+  text-align: center;
+  color: var(--header-font-color);
+  box-shadow: var(--box-shadow);
+}

@@ -1,5 +1,9 @@
 // main.js
 
+import './ThreeWorld.js';
+
 document.querySelector('#approot').innerHTML = `
-  <h1>3D Noodling</h1>
+  <header>
+    <h1>3D Noodling</h1>
+  </header>
 `
