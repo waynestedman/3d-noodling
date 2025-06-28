@@ -26,17 +26,19 @@ worldroot.appendChild(renderer.domElement);
 
 // lighting
 const color = 0xFFFFFF;
-// const intensity = 1;
+const directColor = 0x654321;
+
+const intensity = 1;
 const ambLight = new THREE.AmbientLight(color, settings.intensity);
-const directLight = new THREE.DirectionalLight(color, settings.intensity);
+const directLight = new THREE.DirectionalLight(directColor, intensity);
 directLight.position.set(5, 10, 7.5);
 directLight.castShadow = true;
-// directLight.intensity = 2;
-scene.add(directLight);
+directLight.intensity = 20;
+scene.add(ambLight, directLight);
 
 // geometry & materials
 const boxGeometry = new THREE.BoxGeometry(2, 2, 2);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb });
 const cube = new THREE.Mesh(boxGeometry, material);
 scene.add(cube);
 
