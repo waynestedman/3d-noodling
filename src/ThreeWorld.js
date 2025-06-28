@@ -1,6 +1,18 @@
 // three js world
+
+import * as dat from 'dat.gui';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const gui = new dat.GUI();
+
+// light intensity variable
+const settings = {
+  intensity: 0.2, // Default intensity multiplier
+};
+
+// Add dat.GUI slider
+gui.add(settings, 'intensity', 0, 10).step(0.2).name('Light intensity');
 
 const worldroot = document.querySelector('#threeroot');
 const scene = new THREE.Scene();
@@ -14,12 +26,12 @@ worldroot.appendChild(renderer.domElement);
 
 // lighting
 const color = 0xFFFFFF;
-const intensity = 1;
-const ambLight = new THREE.AmbientLight(color, intensity);
-const directLight = new THREE.DirectionalLight(color, intensity);
+// const intensity = 1;
+const ambLight = new THREE.AmbientLight(color, settings.intensity);
+const directLight = new THREE.DirectionalLight(color, settings.intensity);
 directLight.position.set(5, 10, 7.5);
 directLight.castShadow = true;
-directLight.intensity = 2;
+// directLight.intensity = 2;
 scene.add(directLight);
 
 // geometry & materials
