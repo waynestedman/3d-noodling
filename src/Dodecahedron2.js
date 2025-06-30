@@ -4,14 +4,17 @@ import * as THREE from 'three';
 import { GUI } from 'lil-gui';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const width = window.innerWidth, height = window.innerHeight;
+// camera & scene setup
+const threeCanvas = document.getElementById('threeroot');
+const width = 1280; // window.innerWidth;
+const height = 1024; // window.innerHeight;
 const gui = new GUI();
 
-// camera
 const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 10 );
-camera.position.z = 5;
+camera.position.set(0, 0, 3);
 
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x333333);
 
 // lighting
 const ambientLight = new THREE.AmbientLight(0x404040, 0.6); // soft white light
@@ -22,30 +25,34 @@ directionalLight.position.set(5, 5, 5);
 scene.add(directionalLight);
 
 // geometry & mesh
-let geometry = new THREE.DodecahedronGeometry(1, 0);
+let dodecageometry = new THREE.DodecahedronGeometry(1, 0);
 const material = new THREE.MeshBasicMaterial({ color: 0x987654, wireframe: false });
 
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
-
-// Wireframe mesh (always visible)
+const mesh = new THREE.Mesh(dodecageometry, material);
+// scene.add(mesh);
 const wireframeMaterial = new THREE.MeshBasicMaterial({ color: 0x444444, wireframe: true });
-const wireframeMesh = new THREE.Mesh(geometry.clone(), wireframeMaterial);
-scene.add(wireframeMesh);
+const wireframeMesh = new THREE.Mesh(dodecageometry.clone(), wireframeMaterial);
+// scene.add(wireframeMesh);
+
+const dodecaGroup = new THREE.Group();
+dodecaGroup.add(mesh);
+dodecaGroup.add(wireframeMesh);
+dodecaGroup.position.set(0, 1, 0);
+scene.add(dodecaGroup);
 
 // Function to update geometry
 function updateGeometry() {
 	// Dispose of old geometry to prevent memory leaks
-	mesh.geometry.dispose();
+	mesh.dodecageometry.dispose();
 	
 	// Create new geometry with current parameters
-	geometry = new THREE.DodecahedronGeometry(obj.radius, obj.detail);
-	mesh.geometry = geometry;
+	dodecageometry = new THREE.DodecahedronGeometry(obj.radius, obj.detail);
+	mesh.dodecageometry = dodecageometry;
 	
-	// Update wireframe mesh geometry too
+	// Update wireframe mesh geometry
 	if (wireframeMesh) {
-		wireframeMesh.geometry.dispose();
-		wireframeMesh.geometry = geometry.clone();
+		wireframeMesh.dodecageometry.dispose();
+		wireframeMesh.dodecageometry = dodecageometry.clone();
 	}
 }
 
@@ -78,7 +85,7 @@ gui.add(obj, 'materialType', ['Basic', 'Normal', 'Lambert']).onChange(updateMate
 const renderer = new THREE.WebGLRenderer( { antialias: true } );
 renderer.setSize( width, height );
 renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
+threeCanvas.appendChild( renderer.domElement );
 
 // controls
 const controls = new OrbitControls(camera, renderer.domElement);
