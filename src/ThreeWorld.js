@@ -1,17 +1,17 @@
 // three js world
 
-import * as dat from 'dat.gui';
+import GUI from 'lil-gui';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
-const gui = new dat.GUI();
+const gui = new GUI();
 
 // light intensity variable
 const settings = {
   intensity: 0.2, // Default intensity multiplier
 };
 
-// Add dat.GUI slider
+// Add GUI slider
 gui.add(settings, 'intensity', 0, 10).step(0.2).name('Light intensity');
 
 const worldroot = document.querySelector('#threeroot');
