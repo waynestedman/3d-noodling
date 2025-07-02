@@ -14,7 +14,16 @@
   --font-size: 16px;
   --line-height: 1.5;
   --font-weight: 400;
-
+  /* palette 1 */
+  --sage: #96bca1;
+  --light-orange: #e3ac91;
+  --med-orange: #a77954;
+  --dark-orange: #7f5f42;
+/* palette 2 */
+  --green: #5c735c;
+  --yellow: #f4f3ad;
+  --blue: #83b7d0;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

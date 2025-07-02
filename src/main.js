@@ -1,5 +1,6 @@
 // main.js
 
 // import './ThreeWorld.js';
-// import './example.js';
-import './Dodecahedron2.js';
+import './AnotherExample.js';
+// import './Dodecahedron.js';
+// import './MultiGeometry.js';
