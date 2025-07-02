@@ -1,12 +1,16 @@
 // example from Three.JS github
 
 import * as THREE from 'three';
-import { GUI } from 'lil-gui';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+// import { GUI } from 'lil-gui';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const threeCanvas = document.getElementById('threeroot');
 const width = 1024; // window.innerWidth;
 const height = 768; // window.innerHeight;
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('/draco/');
 
 // Camera & scene setup
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 100);
@@ -50,6 +54,24 @@ sphere.position.set(-4, 0, 0);
 
 scene.add(sphere);
 
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+let tree;
+
+gltfLoader.load('/laurel_tree/scene.gltf', (gltf) => {
+  tree = gltf.scene;
+  tree.scale.set(0.005, 0.005, 0.005);
+
+  // Compute bounding box to center it
+  const box = new THREE.Box3().setFromObject(tree);
+  const center = box.getCenter(new THREE.Vector3());
+  tree.position.sub(center); // Center the model  
+	tree.rotation.x = 1.8;
+  scene.add(tree);
+}, undefined, (error) => {
+  console.error('An error occurred while loading the Tree model:', error);
+});
+
 // show axes helper
 const axesHelper = new THREE.AxesHelper( 5 );
 scene.add(axesHelper);
@@ -60,9 +82,9 @@ const renderer = new THREE.WebGLRenderer({
 	alpha: true,
 	premultipliedAlpha: false,
  });
-renderer.setSize( width, height );
-renderer.setAnimationLoop( animate );
-threeCanvas.appendChild( renderer.domElement );
+renderer.setSize(width, height);
+renderer.setAnimationLoop(animate);
+threeCanvas.appendChild(renderer.domElement);
 
 // controls
 const controls = new OrbitControls(camera, renderer.domElement);
